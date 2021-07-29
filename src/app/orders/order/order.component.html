@@ -1,0 +1,32 @@
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+  
+  <!-- order items table-->
+  <table class="table table-borderless">
+    <thead class="thead-light">
+      <th>Nome</th>
+      <th>DDD</th>
+      <th>Número</th>
+      <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,service.formData.OrderID)"><i class="fa fa-plus"></i> Adicionar </a>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngIf="service.orderItems.length==0" [class.text-danger]="!isValid && service.orderItems.length==0">
+        <td class="font-italic text-center" colspan="5">
+          Nenhum Cadastro Registrado
+        </td>
+      </tr>
+
+      <tr *ngFor="let item of service.orderItems;let i=index;">
+        <td>{{item.Name}}</td>
+        <td>{{item.DDD}}</td>
+        <td>{{item.Number}}</td>
+        <td>
+          <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,service.formData.OrderID)"><i class="fa fa-pencil"></i></a>
+          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemID,i)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</form>
